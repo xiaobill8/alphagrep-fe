@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import CreateStudent from "./components/create-student.component";
 import EditStudent from "./components/edit-student.component";
 import StudentList from "./components/student-list.component";
+import TopStudents from "./components/top-students.component"
 
 // App Component
 const App = () => {
@@ -42,6 +43,12 @@ const App = () => {
                     Student List
                   </Link>
                 </Nav>
+
+                <Nav>
+                  <Link to={"/top-students"} className="nav-link">
+                    Top Students
+                  </Link>
+                </Nav>
               </Nav>
             </Container>
           </Navbar>
@@ -56,6 +63,7 @@ const App = () => {
                   <Route path="/create-student" element={<CreateStudent />} />
                   <Route path="/edit-student/:name" element={<EditStudent />} />
                   <Route path="/student-list" element={<StudentList />} />
+                  <Route path="/top-students" element={<TopStudents />} />
                 </Routes>
               </div>
             </Col>
