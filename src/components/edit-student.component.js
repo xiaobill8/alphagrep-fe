@@ -4,28 +4,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StudentForm from "./StudentForm";
+import { useParams } from "react-router-dom";
 
 // EditStudent Component
-const EditStudent = (props) => {
+const EditStudent = () => {
+  const { name } = useParams();
   const [formValues, setFormValues] = useState({
     name: "",
     password: "",
     classID: "",
   });
-  console.log(props);
 
   //onSubmit handler
   const onSubmit = (studentObject) => {
     axios
       .put(
-        "http://localhost:5000/students/update-student/" +
-          props.match.params.name,
+        "http://localhost:5000/students/update-student/" + name,
         studentObject
       )
       .then((res) => {
         if (res.status === 200) {
           alert("Student successfully updated");
-          props.history.push("/student-list");
+          this.props.history.push("/student-list");
         } else Promise.reject();
       })
       .catch((err) => alert("Something went wrong"));
@@ -34,16 +34,16 @@ const EditStudent = (props) => {
   // Load data from server and reinitialize student form
   useEffect(() => {
     axios
-      .get(
-        "http://localhost:5000/students/update-student/" +
-          props.match.params.name
-      )
+      .get("http://localhost:5000/students/update-student/" + name)
       .then((res) => {
-        const { name, password, class: classID } = res.data;
-        setFormValues({ name, password, classID });
+        console.log("RES:");
+        console.log(res);
+        const { Name, Password, Class } = res.data[0];
+        console.log(Name);
+        setFormValues({ name: Name, password: Password, class: Class });
       })
       .catch((err) => console.log(err));
-  }, [props.match.params.name]);
+  }, [name]);
 
   // Return student form
   return (
