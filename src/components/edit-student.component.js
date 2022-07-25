@@ -10,15 +10,16 @@ const EditStudent = (props) => {
   const [formValues, setFormValues] = useState({
     name: "",
     password: "",
-    class: "",
+    classID: "",
   });
+  console.log(props);
 
   //onSubmit handler
   const onSubmit = (studentObject) => {
     axios
       .put(
-        "http://localhost:5000/students/update-student" +
-          props.match.params.id,
+        "http://localhost:5000/students/update-student/" +
+          props.match.params.name,
         studentObject
       )
       .then((res) => {
@@ -34,14 +35,15 @@ const EditStudent = (props) => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:5000/students/update-student" + props.match.params.id
+        "http://localhost:5000/students/update-student/" +
+          props.match.params.name
       )
       .then((res) => {
         const { name, password, class: classID } = res.data;
         setFormValues({ name, password, classID });
       })
       .catch((err) => console.log(err));
-  }, [props.match.params.id]);
+  }, [props.match.params.name]);
 
   // Return student form
   return (

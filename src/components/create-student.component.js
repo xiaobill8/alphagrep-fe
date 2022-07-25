@@ -10,7 +10,7 @@ const CreateStudent = () => {
   const [formValues, setFormValues] = useState({
     name: "",
     password: "",
-    class: "",
+    classID: "",
   });
   // onSubmit handler
   const onSubmit = (studentObject) => {
