@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { ExportJsonCsv } from "react-export-json-csv";
 import { Table } from "react-bootstrap";
 import StudentTableRow from "./StudentTableRow";
 
@@ -57,6 +58,21 @@ const StudentList = () => {
     });
   };
 
+  const csvHeaders = [
+    {
+      key: "Name",
+      name: "Name",
+    },
+    {
+      key: "Password",
+      name: "Password",
+    },
+    {
+      key: "Class",
+      name: "Class",
+    },
+  ];
+
   return (
     <>
       <div className="table-wrapper">
@@ -73,6 +89,13 @@ const StudentList = () => {
         </Table>
       </div>
       <div className="csv-link">
+        <ExportJsonCsv
+          headers={csvHeaders}
+          items={students}
+          fileTitle="students"
+        >
+          Export CSV
+        </ExportJsonCsv>
         <form>
           <input
             type={"file"}
