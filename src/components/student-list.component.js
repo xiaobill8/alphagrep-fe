@@ -18,7 +18,22 @@ const StudentList = () => {
 
     if (file) {
       fileReader.onload = function (event) {
-        const csvOutput = event.target.result;
+        const csvInput = event.target.result;
+        const formData = new FormData();
+        formData.append("csvInput", csvInput);
+        axios
+          .post("http://localhost:5000/students/upload-csv", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              alert("CSV file successfully uploaded.");
+              window.location.reload();
+            } else Promise.reject();
+          })
+          .catch((err) => alert("CSV Upload failed"));
       };
 
       fileReader.readAsText(file);
