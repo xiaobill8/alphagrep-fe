@@ -8,22 +8,22 @@ const StudentTableRow = (props) => {
 
   const deleteStudent = () => {
     axios
-      .delete(
-        "http://localhost:5000/students/delete-student/" + Name,
-        {
-          data: {},
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .delete("http://localhost:5000/students/delete-student/" + Name, {
+        data: {},
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         if (res.status === 200) {
           alert("Student successfully deleted");
           window.location.reload();
         } else Promise.reject();
       })
-      .catch((err) => alert("Something went wrong"));
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.message);
+      });
   };
 
   return (

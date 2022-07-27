@@ -29,7 +29,10 @@ const EditStudent = () => {
           navigate("/student-list");
         } else Promise.reject();
       })
-      .catch((err) => alert("Something went wrong"));
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.message);
+      });
   };
 
   // Load data from server and reinitialize student form

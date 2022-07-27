@@ -20,7 +20,10 @@ const CreateStudent = () => {
         if (res.status === 200) alert("Student successfully created");
         else Promise.reject();
       })
-      .catch((err) => alert("Something went wrong"));
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.message);
+      });
   };
 
   // Return student form

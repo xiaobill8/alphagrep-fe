@@ -34,7 +34,10 @@ const StudentList = () => {
               window.location.reload();
             } else Promise.reject();
           })
-          .catch((err) => alert("CSV Upload failed"));
+          .catch((err) => {
+            console.log(err);
+            alert(err.response.data.message);
+          });
       };
 
       fileReader.readAsText(file);

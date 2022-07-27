@@ -20,7 +20,10 @@ const AddScore = () => {
         if (res.status === 200) alert("Score successfully added");
         else Promise.reject();
       })
-      .catch((err) => alert("Something went wrong"));
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.message);
+      });
   };
 
   // Return student form

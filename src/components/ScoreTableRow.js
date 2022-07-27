@@ -20,7 +20,10 @@ const ScoreTableRow = (props) => {
           window.location.reload();
         } else Promise.reject();
       })
-      .catch((err) => alert("Something went wrong"));
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.message);
+      });
   };
 
   return (
