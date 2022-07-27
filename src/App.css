@@ -37,6 +37,22 @@ body h3 {
   text-decoration: none;
   color: #ffffff;
 }
+
+.csv-link {
+  padding: 7px 10px;
+  font-size: 0.875rem;
+  line-height: normal;
+  border-radius: 0.2rem;
+  background-color: #B2BEB5;
+  margin: auto;
+  text-align: center;
+  top: 5px;
+}
+  
+.csv-link:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
   
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

@@ -5,6 +5,25 @@ import StudentTableRow from "./StudentTableRow";
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
+  const [file, setFile] = useState();
+
+  const fileReader = new FileReader();
+
+  const handleOnChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    if (file) {
+      fileReader.onload = function (event) {
+        const csvOutput = event.target.result;
+      };
+
+      fileReader.readAsText(file);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -24,19 +43,38 @@ const StudentList = () => {
   };
 
   return (
-    <div className="table-wrapper">
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Password</th>
-            <th>Class</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>{DataTable()}</tbody>
-      </Table>
-    </div>
+    <>
+      <div className="table-wrapper">
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Password</th>
+              <th>Class</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>{DataTable()}</tbody>
+        </Table>
+      </div>
+      <div className="csv-link">
+        <form>
+          <input
+            type={"file"}
+            id={"csvFileInput"}
+            accept={".csv"}
+            onChange={handleOnChange}
+          />
+          <button
+            onClick={(e) => {
+              handleOnSubmit(e);
+            }}
+          >
+            Import CSV
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 
